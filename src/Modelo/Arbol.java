@@ -11,7 +11,7 @@ package Modelo;
  */
 public abstract class Arbol {
 
-    private Nodo raíz = null;
+    public Nodo raíz = null;
 
     private class Nodo {
 
@@ -31,15 +31,16 @@ public abstract class Arbol {
     public Arbol() {
     }
 
-    public abstract int comparar(Object obj1, Object obj2);
+    public abstract int comparar(int obj1, int obj2);
 
-    public abstract void procesar(Object obj);
+    public abstract void procesar(int[] i);
 
-    public Object buscar(Object obj) {
+    public Object buscar(int obj) {
         Nodo actual = raíz;
         int nComp = 0;
         while (actual != null) {
-            if ((nComp = comparar(obj, actual.datos)) == 0) {
+            int[] comparar = (int [])actual.datos;
+            if ((nComp = comparar(obj, comparar[0])) == 0) {
                 return (actual.datos);
             } else if (nComp < 0) {
                 actual = actual.izquierdo;
@@ -50,15 +51,17 @@ public abstract class Arbol {
         return null;
     }
 
-    public int insertar(Object obj) {
+    public int insertar(int[] obj) {
+        System.out.println("error 0 AntesW2 "+obj[0]+" - "+obj[1]);
         Nodo último = null, actual = raíz;
         int nComp = 0;
         if (obj == null) {
             return NO_DATOS;
         }
-
+ System.out.println("error 0 AntesW "+obj[0]+" - "+obj[1]);
         while (actual != null) {
-            if ((nComp = comparar(obj, actual.datos)) == 0) {
+            int []a=(int[]) actual.datos;
+            if ((nComp = comparar(obj[0], a[0])) == 0) {
                 break;
             } else {
                 último = actual;
@@ -69,8 +72,10 @@ public abstract class Arbol {
                 }
             }
         }
+        System.out.println("error 0 Antes "+obj[0]+" - "+obj[1]);
         if (actual == null) {
             Nodo nuevoNodo = new Nodo();
+            System.out.println("error 0 "+obj[0]+" - "+obj[1]);
             nuevoNodo.datos = obj;
             nuevoNodo.izquierdo = nuevoNodo.derecho = null;
 
@@ -87,21 +92,23 @@ public abstract class Arbol {
         }
     }
 
-    public Object borrar(Object obj) 
+    public Object borrar(int obj) 
     {
 
         Nodo ultimo = null, actual = raíz;
         Nodo marcado = null, sucesor = null;
         int nAnteriorComp = 0, nComp = 0;
 
-        if (obj == null) 
+        if (obj == 0) 
             return null;
         
 
         while (actual != null) 
         {
             nAnteriorComp = nComp;
-            if ((nComp = comparar(obj, actual.datos)) == 0) 
+            int a[]=(int[]) actual.datos;
+            
+            if ((nComp = comparar(obj, a[0])) == 0) 
                 break;
              else 
             {
@@ -157,19 +164,26 @@ public abstract class Arbol {
         
     }
 
-    private void inorden(Nodo r, boolean nodoRaiz) {
+    private void inorden(Nodo r, boolean nodoRaiz) 
+    {
+        System.out.println("EntroInicio");
         Nodo actual = null;
         if (nodoRaiz) {
+            System.out.println("Entro1");
             actual = raíz;
         } else {
+            System.out.println("Entro");
             actual = r;
-            if (actual != null) {
+        }
+            if (actual != null)
+            {
 
                 inorden(actual.izquierdo, false);
-                procesar(actual.datos);
+                procesar((int[]) actual.datos);
+                System.out.println("Entro");
                 inorden(actual.derecho, false);
             }
-        }
+        
 
     }
 

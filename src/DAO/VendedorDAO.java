@@ -18,7 +18,7 @@ public class VendedorDAO {
 
     private RandomAccessFile file;
     private int nregs = 0;
-    private int tamañoreg = 0;
+    private int tamañoreg = 76;// 4(entero),4,4,40 (20 char),4, 20 (10 char) --> Bytes por registro
     private boolean regsEliminados = false;
 
     public VendedorDAO(File fichero) throws IOException {
@@ -26,6 +26,7 @@ public class VendedorDAO {
             throw new IOException(fichero.getName() + "no es un fichero");
         }
         file = new RandomAccessFile(fichero, "rw");
+       
         nregs = (int) Math.ceil((double) file.length() / (double) tamañoreg);
     }
 
@@ -38,21 +39,21 @@ public class VendedorDAO {
     }
 
     public boolean escribirReg(int i, Vendedor vendedor) throws IOException {
-        if (i >= 0 && i <= nregs) {
+        if (i >= 0 && i <= nregs) 
+        {
             file.seek(i * tamañoreg);
             // public Vendedor(int idVendedor, int id, String nombre, int telefono, String correo) {
             file.writeInt(vendedor.getIdVendedor());
             file.writeInt(vendedor.getContraseña());
             file.writeInt(vendedor.getId());
-            for (int j = 0; j < vendedor.getNombre().length(); j++) {
+            for (int j = 0; j < vendedor.getNombre().length(); j++) {//40byts 20 chars
                 file.writeChar(vendedor.getNombre().charAt(j));
             }
             file.writeInt(vendedor.getTelefono());
-            for (int j = 0; j < vendedor.getCorreo().length(); j++) {
+            for (int j = 0; j < vendedor.getCorreo().length(); j++) {//10
                 file.writeChar(vendedor.getCorreo().charAt(j));
             }
-            this.tamañoreg = (int) file.length();
-            return true;
+                        return true;
         }
         return false;
     }
@@ -70,7 +71,7 @@ public class VendedorDAO {
 
             int telefono = file.readInt();
             String correo = "";
-            for (int j = 0; j < 20; j++) {
+            for (int j = 0; j < 10; j++) {
                 correo = correo + file.readChar();
             }
             return new Vendedor(idVendedor,contraseña, id, nombre, telefono, correo);
@@ -102,11 +103,17 @@ public class VendedorDAO {
     public boolean tieneRegseliminados() {
         return regsEliminados;
     }
-
+/**
+ * El metodo buscar, permite saber el indice al que pertenece el vendedor en el archivo aleatorio a partir de su id
+ * @param id es la variable que pertenece al vendedor como trabajador del supermercado (En la clase se conoce como idVendedor)
+ * @param pos
+ * @return el indice que pertenece en el archivo el vendedor
+ * @throws IOException 
+ */
     public int buscarReg(int id, int pos) throws IOException {
         Vendedor vendedor;
         int idVendedor;
-        if (id == 0) {
+        if (id == 0) {//Fue eliminado
             return -1;
         }
         if (pos < 0) {
@@ -123,5 +130,13 @@ public class VendedorDAO {
         return -1;
 
     }
+   
 
+    public void tamañoArchivo() throws IOException{
+        System.out.println("Tamaño: "+file.length());
+    }
+    public int size(){
+        return this.tamañoreg;
+    }
+   
 }

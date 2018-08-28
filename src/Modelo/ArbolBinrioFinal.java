@@ -12,7 +12,7 @@ package Modelo;
 public class ArbolBinrioFinal extends Arbol {
 
     @Override
-    public int comparar(Object obj1, Object obj2) {
+    public int comparar(int obj1, int obj2) {
         int id1 = (int) obj1;
         int id2 = (int) obj2;
         int res = 0;
@@ -28,7 +28,7 @@ public class ArbolBinrioFinal extends Arbol {
     }
 
     @Override
-    public void procesar(Object obj) {
+    public void procesar(int [] obj) {
         System.out.println(obj.toString());
     }
 
