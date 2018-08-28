@@ -47,13 +47,13 @@ public class Prueba2 {
             miVD.escribirReg(1, miV2);*/
         /* miVD.añadirReg(miV1);
          miVD.añadirReg(miV2);*/
-        miVD.añadirReg(miV);
+        //miVD.añadirReg(miV);
             miVD.tamañoArchivo();
             System.out.println("Numero registros "+miVD.numeroDeRegs());
           Vendedor leido = miVD.leerReg(2);
                 System.out.println("Nombre: "+leido.getNombre());
                 System.out.println(leido.toString());
-                
+            System.out.println("Buscar el 123 "+miVD.buscarReg(123));     
                 
                 miVD.cerrarFichero();
         } catch (IOException ex) {
