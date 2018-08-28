@@ -13,6 +13,7 @@ import java.io.RandomAccessFile;
 /**
  *Esta clase permite administrar los registros de la clase Administrador
  * @author Johan Sánchez
+ * @since 29/08/2018
  */
 public class AdministradorDAO {
     private RandomAccessFile file;
@@ -121,7 +122,7 @@ public class AdministradorDAO {
         for (int i = 0; i < nregs; i++) {
             administrador = leerReg(i);
             if (administrador.getIdAdmin()== id) {
-                administrador.setId(0);
+                administrador.setIdAdmin(0);
                 escribirReg(i, administrador);
                 regsEliminados = true;
                 return true;

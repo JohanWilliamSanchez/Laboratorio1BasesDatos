@@ -64,11 +64,11 @@ public class VendedorDAO {
             file.writeInt(vendedor.getIdVendedor());
             file.writeInt(vendedor.getContraseña());
             file.writeInt(vendedor.getId());
-            for (int j = 0; j < vendedor.getNombre().length(); j++) {//40byts 20 chars
+            for (int j = 0; j < 20; j++) {//40byts 20 chars
                 file.writeChar(vendedor.getNombre().charAt(j));
             }
             file.writeInt(vendedor.getTelefono());
-            for (int j = 0; j < vendedor.getCorreo().length(); j++) {//10
+            for (int j = 0; j < 10; j++) {//10
                 file.writeChar(vendedor.getCorreo().charAt(j));
             }
                         return true;
@@ -124,7 +124,7 @@ public class VendedorDAO {
         for (int i = 0; i < nregs; i++) {
             vendedor = leerReg(i);
             if (vendedor.getIdVendedor() == id) {
-                vendedor.setId(0);
+                vendedor.setIdVendedor(0);
                 escribirReg(i, vendedor);
                 regsEliminados = true;
                 return true;

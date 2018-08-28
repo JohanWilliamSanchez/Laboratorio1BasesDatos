@@ -6,24 +6,34 @@
 package Modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+
 
 /**
  *
  * @author Johan Sánchez
  */
 public class Factura implements  Serializable{
-    private int efectivoResibido, cambio;
-    private Date fechaFactura;
+    private int idFactura,efectivoResibido, cambio;
+    private Calendar fechaFactura;
     private double impuesto;
     private Cliente miCl;
 
-    public Factura(int efectivoResibido, int cambio, Date fechaFactura, double impuesto, Cliente miCl) {
+    public Factura(int idFactura,int efectivoResibido, int cambio, Calendar fechaFactura, double impuesto, Cliente miCl) {
+        this.idFactura = idFactura;
         this.efectivoResibido = efectivoResibido;
         this.cambio = cambio;
         this.fechaFactura = fechaFactura;
         this.impuesto = impuesto;
         this.miCl = miCl;
+    }
+
+    public int getIdFactura() {
+        return idFactura;
+    }
+
+    public void setIdFactura(int idFactura) {
+        this.idFactura = idFactura;
     }
 
     public int getEfectivoResibido() {
@@ -42,11 +52,11 @@ public class Factura implements  Serializable{
         this.cambio = cambio;
     }
 
-    public Date getFechaFactura() {
+    public Calendar getFechaFactura() {
         return fechaFactura;
     }
 
-    public void setFechaFactura(Date fechaFactura) {
+    public void setFechaFactura(Calendar fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 

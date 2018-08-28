@@ -5,8 +5,9 @@
  */
 package Modelo;
 
-import java.util.ArrayList;
-import java.util.Date;
+
+import java.util.Calendar;
+
 
 /**
  *
@@ -28,7 +29,7 @@ public class CajaRegistradora {
 
     //inicializar factura
     public Factura crearFactura(int efectivoResibido, int cambio,double impuesto, Cliente miCL) {
-       Factura miFactura = new Factura(efectivoResibido, cambio, new Date(), impuesto, miCL);
+       Factura miFactura = new Factura(idCaja, efectivoResibido, cambio, Calendar.getInstance(), impuesto, miCL);
 return miFactura;
     }
 
@@ -47,4 +48,13 @@ return miFactura;
     public void setIdVendedor(int idVendedor) {
         this.idVendedor = idVendedor;
     }
+
+    public ComputadorPersonal getcP() {
+        return cP;
+    }
+
+    public void setcP(ComputadorPersonal cP) {
+        this.cP = cP;
+    }
+    
 }

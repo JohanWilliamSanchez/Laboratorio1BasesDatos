@@ -5,36 +5,47 @@
  */
 package Modelo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  *
  * @author Johan Sánchez
  */
-class Producto {
-    private String nombre;
-    private int codigo, cantidad;
+public class Producto {
+    private int idProducto;
+    private String nombre;//10 caraacteres
+    private int  cantidad;
     private double precio;
     private int codigoBarra;
-    private Date entrada, cadusidad;
-    private String proveedor;
-    private double precioUnitario;
+    private Calendar entrada, cadusidad;
+    private String proveedor;//10 caracteres
+    
     private int estado;// 0->No hay, 1-> Hay, -1->Esta en bodega
 
     public Producto() {
     }
 
-    public Producto(String nombre, int codigo, int cantidad, double precio, int codigoBarra, Date entrada, Date cadusidad, String proveedor, double precioUnitario, int estado) {
+    public Producto(int idProducto,String nombre,  int cantidad, double precio, int codigoBarra, Calendar entrada, Calendar cadusidad, String proveedor,  int estado) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
-        this.codigo = codigo;
+        
         this.cantidad = cantidad;
         this.precio = precio;
         this.codigoBarra = codigoBarra;
         this.entrada = entrada;
         this.cadusidad = cadusidad;
         this.proveedor = proveedor;
-        this.precioUnitario = precioUnitario;
+        
         this.estado = estado;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -45,13 +56,7 @@ class Producto {
         this.nombre = nombre;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+   
 
     public int getCantidad() {
         return cantidad;
@@ -77,19 +82,19 @@ class Producto {
         this.codigoBarra = codigoBarra;
     }
 
-    public Date getEntrada() {
+    public Calendar getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(Date entrada) {
+    public void setEntrada(Calendar entrada) {
         this.entrada = entrada;
     }
 
-    public Date getCadusidad() {
+    public Calendar getCadusidad() {
         return cadusidad;
     }
 
-    public void setCadusidad(Date cadusidad) {
+    public void setCadusidad(Calendar cadusidad) {
         this.cadusidad = cadusidad;
     }
 
@@ -101,13 +106,7 @@ class Producto {
         this.proveedor = proveedor;
     }
 
-    public double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
+   
 
     public int getEstado() {
         return estado;

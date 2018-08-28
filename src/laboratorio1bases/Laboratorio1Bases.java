@@ -45,6 +45,9 @@ Date.set(Calendar.YEAR, 2080);
         Date.set(1998, 6, 7);
         System.out.println(Date.getTime());
         System.out.println("El mes es: "+ Date.get(Calendar.MONTH));
-        
+        int year = Date.get(Calendar.YEAR);
+        int month = Date.get(Calendar.MONTH);
+        int day = Date.get(Calendar.DAY_OF_MONTH);
+        System.out.println(year+" "+month+" "+day);
     }
 }
