@@ -62,11 +62,11 @@ public class AdministradorDAO {
             file.writeInt(administrador.getIdAdmin());
             file.writeInt(administrador.getContraseña());
             file.writeInt(administrador.getId());
-            for (int j = 0; j < administrador.getNombre().length(); j++) {//40byts 20 chars
+            for (int j = 0; j < 20; j++) {//40byts 20 chars
                 file.writeChar(administrador.getNombre().charAt(j));
             }
             file.writeInt(administrador.getTelefono());
-            for (int j = 0; j < administrador.getCorreo().length(); j++) {//10
+            for (int j = 0; j < 10; j++) {//10
                 file.writeChar(administrador.getCorreo().charAt(j));
             }
                         return true;

@@ -18,7 +18,7 @@ import java.io.RandomAccessFile;
 public class CajaDAO {
     private RandomAccessFile file;
     private int nregs = 0;
-    private int tamañoreg = 20;// 4(entero),4,4,8(Marca de cuatro caracteres)
+    private int tamañoreg = 28;// 4(entero),4,4,8(Marca de cuatro caracteres),8
     private boolean regsEliminados = false;
 /**
  * Constructor de la clase que abre el archivo de las cajas registradoras
@@ -64,9 +64,12 @@ public class CajaDAO {
             ComputadorPersonal cP = caja.getcP();
             file.writeInt(cP.getIdCompu());
             String marca= cP.getMarca();
+            
             for (int j = 0; j < 4; j++) {
-                file.writeChar(marca.charAt(i));
+                
+                file.writeChar(marca.charAt(j));
             }
+            file.writeDouble(caja.getValor());
                         return true;
         }
         return false;
@@ -88,7 +91,8 @@ public class CajaDAO {
                 marca = marca + file.readChar();
             }
 ComputadorPersonal cP =  new  ComputadorPersonal(idCompu, marca);
-            return new CajaRegistradora(idCaja,idVendedor, cP);
+double valor = file.readDouble();
+            return new CajaRegistradora(idCaja,idVendedor, cP,valor);
         }
         System.out.println("Numero de registro fuera de limites");
         return null;

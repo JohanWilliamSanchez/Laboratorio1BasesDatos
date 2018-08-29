@@ -17,13 +17,15 @@ public class CajaRegistradora {
 
     private int idCaja,  idVendedor;
     private ComputadorPersonal cP;
+    private double valor;
     
    // private ArrayList<Producto> productosFactura;
 
-    public CajaRegistradora(int idCaja, int idVendedor, ComputadorPersonal cP) {
+    public CajaRegistradora(int idCaja, int idVendedor, ComputadorPersonal cP,double valor) {
         this.idCaja = idCaja;
         this.idVendedor = idVendedor;
         this.cP = cP;
+        this.valor=valor;
         // this.prroductosFactura = new ArrayList<>();
     }
 
@@ -31,6 +33,14 @@ public class CajaRegistradora {
     public Factura crearFactura(int efectivoResibido, int cambio,double impuesto, Cliente miCL) {
        Factura miFactura = new Factura(idCaja, efectivoResibido, cambio, Calendar.getInstance(), impuesto, miCL);
 return miFactura;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public int getIdCaja() {

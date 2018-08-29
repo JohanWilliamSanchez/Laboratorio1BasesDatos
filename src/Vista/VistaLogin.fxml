@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,20 +9,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="513.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VistaLoginController">
    <children>
-      <Pane layoutX="93.0" layoutY="63.0" prefHeight="275.0" prefWidth="346.0">
+      <Pane layoutX="4.0" layoutY="8.0" prefHeight="405.0" prefWidth="289.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="105.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imagenLoging" fitHeight="150.0" fitWidth="200.0" layoutX="76.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../login.png" />
                </image>
             </ImageView>
-            <PasswordField layoutX="116.0" layoutY="238.0" />
-            <Label layoutX="14.0" layoutY="238.0" text="Contraseña:" />
-            <Label layoutX="14.0" layoutY="208.0" text="Usuario:" />
-            <TextField layoutX="116.0" layoutY="208.0" />
+            <PasswordField fx:id="textFContraseña" layoutX="116.0" layoutY="275.0" />
+            <Label fx:id="labelContraseña" layoutX="14.0" layoutY="275.0" text="Contraseña:" />
+            <Label fx:id="labelUsuario" layoutX="14.0" layoutY="245.0" text="Usuario:" />
+            <TextField fx:id="textFUsuario" layoutX="116.0" layoutY="245.0" />
+            <RadioButton fx:id="radioBAdministrador" layoutX="57.0" layoutY="315.0" mnemonicParsing="false" text="Administrador">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radioBVendedor" layoutX="155.0" layoutY="315.0" mnemonicParsing="false" text="Vendedor" toggleGroup="$group" />
+            <Button fx:id="botonOK" disable="true" layoutX="101.0" layoutY="344.0" mnemonicParsing="false" onAction="#accionEnviar" prefHeight="25.0" prefWidth="73.0" text="OK" />
+            <Label fx:id="labelError" layoutX="-9.0" layoutY="-13.0" prefHeight="55.0" prefWidth="308.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
