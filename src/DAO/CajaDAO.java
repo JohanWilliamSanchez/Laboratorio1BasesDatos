@@ -10,6 +10,7 @@ import Modelo.ComputadorPersonal;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +21,7 @@ public class CajaDAO {
     private int nregs = 0;
     private int tamañoreg = 28;// 4(entero),4,4,8(Marca de cuatro caracteres),8
     private boolean regsEliminados = false;
+    private ArrayList<CajaRegistradora> lista;
 /**
  * Constructor de la clase que abre el archivo de las cajas registradoras
  * @param fichero
@@ -32,6 +34,7 @@ public class CajaDAO {
         file = new RandomAccessFile(fichero, "rw");
        
         nregs = (int) Math.ceil((double) file.length() / (double) tamañoreg);
+        lista =  new ArrayList<>();
     }
 /**
  * Cierra el flujo de datos del archivo
@@ -171,4 +174,16 @@ double valor = file.readDouble();
     public int size(){
         return this.tamañoreg;
     }
+    /**
+     * Este metodo permite agregar los datos del archivo aleatorio en una lista, con el fin de convertirloen Obervablelist; para
+     * añadir los datos n una tabla javafx
+     * @return la lista convertida
+     * @throws IOException  
+     */
+   public ArrayList convertirArchivoALista() throws IOException{
+       for (int i = 0; i < nregs; i++) {
+           this.lista.add(leerReg(i));
+       }
+       return this.lista;
+   }
 }

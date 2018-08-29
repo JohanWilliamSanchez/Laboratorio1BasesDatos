@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VistaLoginController">
+<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.VistaLoginController">
    <children>
       <Pane layoutX="4.0" layoutY="8.0" prefHeight="405.0" prefWidth="289.0">
          <children>

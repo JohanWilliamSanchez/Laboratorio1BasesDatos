@@ -9,6 +9,7 @@ import Modelo.Vendedor;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 /**
  * Clase que me permite administrar los archivos de los vendedores
@@ -22,6 +23,7 @@ public class VendedorDAO {
     private int nregs = 0;
     private int tamañoreg = 76;// 4(entero),4,4,40 (20 char),4, 20 (10 char) --> Bytes por registro
     private boolean regsEliminados = false;
+    private ArrayList<Vendedor> lista;
 /**
  * Constructor de la clase que abre el archivo de los vendedores
  * @param fichero
@@ -34,6 +36,7 @@ public class VendedorDAO {
         file = new RandomAccessFile(fichero, "rw");
        
         nregs = (int) Math.ceil((double) file.length() / (double) tamañoreg);
+        lista  = new ArrayList<>();
     }
 /**
  * Cierra el flujo de datos del archivo
@@ -176,5 +179,18 @@ public class VendedorDAO {
     public int size(){
         return this.tamañoreg;
     }
+    /**
+     * Este metodo permite agregar los datos del archivo aleatorio en una lista, con el fin de convertirloen Obervablelist; para
+     * añadir los datos n una tabla javafx
+     * @return la lista convertida
+     * @throws IOException  
+     */
+   public ArrayList convertirArchivoALista() throws IOException{
+       for (int i = 0; i < nregs; i++) {
+           this.lista.add(leerReg(i));
+       }
+       return this.lista;
+   }
+  
    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package Vista;
 
 import java.awt.event.ActionEvent;
 import java.net.URL;

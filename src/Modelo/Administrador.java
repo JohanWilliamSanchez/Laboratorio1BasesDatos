@@ -36,6 +36,7 @@ public class Administrador extends Persona{
         this.idAdmin = idAdmin;
     }
     
+    
 }
     
 

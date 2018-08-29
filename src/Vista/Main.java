@@ -24,12 +24,12 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("/Vista/VistaLogin.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("VistaLogin.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
-        //stage.setTitle("Login");
+        stage.setTitle("Login");
         stage.show();
     }
     

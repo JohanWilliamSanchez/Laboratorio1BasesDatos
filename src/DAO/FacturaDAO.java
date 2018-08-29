@@ -10,6 +10,7 @@ import Modelo.Factura;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -22,6 +23,7 @@ public class FacturaDAO {
     private int nregs = 0;
     private int tamañoreg = 104;// 4,4,4,12(Date 4,4,4[año,mes,dia]),8(double),60 (Cliente 4,4,40 nombre,4, 20 direccion)
     private boolean regsEliminados = false;
+    private ArrayList<Factura> lista;
 
     /**
      * Constructor de la clase que abre el archivo de los vendedores
@@ -36,6 +38,7 @@ public class FacturaDAO {
         file = new RandomAccessFile(fichero, "rw");
 
         nregs = (int) Math.ceil((double) file.length() / (double) tamañoreg);
+        lista =  new ArrayList<>();
     }
 
     /**
@@ -228,4 +231,16 @@ public class FacturaDAO {
     public int size() {
         return this.tamañoreg;
     }
+    /**
+     * Este metodo permite agregar los datos del archivo aleatorio en una lista, con el fin de convertirloen Obervablelist; para
+     * añadir los datos n una tabla javafx
+     * @return la lista convertida
+     * @throws IOException  
+     */
+   public ArrayList convertirArchivoALista() throws IOException{
+       for (int i = 0; i < nregs; i++) {
+           this.lista.add(leerReg(i));
+       }
+       return this.lista;
+   }
 }

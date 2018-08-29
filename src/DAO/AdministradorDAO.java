@@ -6,9 +6,12 @@
 package DAO;
 
 import Modelo.Administrador;
+import Modelo.CajaRegistradora;
+import Modelo.Factura;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 /**
  *Esta clase permite administrar los registros de la clase Administrador
@@ -20,6 +23,7 @@ public class AdministradorDAO {
     private int nregs = 0;
     private int tamañoreg = 76;// 4(entero),4,4,40 (20 char),4, 20 (10 char) --> Bytes por registro
     private boolean regsEliminados = false;
+    private ArrayList<Administrador> lista;
 /**
  * Constructor de la clase que abre el archivo de los vendedores
  * @param fichero
@@ -32,6 +36,7 @@ public class AdministradorDAO {
         file = new RandomAccessFile(fichero, "rw");
        
         nregs = (int) Math.ceil((double) file.length() / (double) tamañoreg);
+        lista =  new ArrayList<>();
     }
 /**
  * Cierra el flujo de datos del archivo
@@ -175,4 +180,80 @@ public class AdministradorDAO {
         return this.tamañoreg;
     }
     
+    /**
+     * Este metodo permite agregar los datos del archivo aleatorio en una lista, con el fin de convertirloen Obervablelist; para
+     * añadir los datos n una tabla javafx
+     * @return la lista convertida
+     * @throws IOException  
+     */
+   public ArrayList convertirArchivoALista() throws IOException{
+       for (int i = 0; i < nregs; i++) {
+           this.lista.add(leerReg(i));
+       }
+       return this.lista;
+   }
+   
+   /**
+    * Este metodo facilit saber el n ombre de los productos vendidps y su total
+    * @return Todo los productos vendidos
+    * @throws IOException 
+    */
+   public ArrayList ventasPorProductos() throws IOException{
+       File fichero = new File("facturas");
+       FacturaDAO miF =  new FacturaDAO(fichero);
+       ArrayList<Factura> facturas = miF.convertirArchivoALista();
+       ArrayList<Factura.ProductoVendido> misProductos= new ArrayList<>();
+       for (int i = 0; i < facturas.size(); i++) {
+           Factura f = facturas.get(i);
+           for (int j = 0; j < f.lista().size(); j++) {
+               misProductos.add((Factura.ProductoVendido) f.lista().get(i));
+           }
+       }
+       return misProductos;
+   }
+   /**
+    * Este metodo permite saber cada vendedor que ganancias a dado o perdidas
+    * @return todos los vendeedores con sus respectivas ventas
+    * @throws IOException 
+    */
+   public ArrayList ventasPorVendedor() throws IOException{
+       ArrayList<VentaVendedor> misVen = new ArrayList<>();
+       File fichero = new File("cajas.txt");
+       CajaDAO miDao = new CajaDAO(fichero);
+       ArrayList<CajaRegistradora> misCajas = miDao.convertirArchivoALista();
+       
+       for (int i = 0; i < misCajas.size(); i++) {
+           misVen.add(new VentaVendedor(misCajas.get(i).getIdVendedor(), (misCajas.get(i).getValor()-500000)));
+       }
+       return misVen;
+   }
+   /**
+    * Esta clae la utilizamos para manipular los datos de las ventas de un endedor especifico
+    */
+   public class VentaVendedor{
+       private int idVendedor;
+       private double venta;
+
+        public VentaVendedor(int idVendedor, double venta) {
+            this.idVendedor = idVendedor;
+            this.venta = venta;
+        }
+
+        public int getNombre() {
+            return idVendedor;
+        }
+
+        public void setNombre(int idVendedor) {
+            this.idVendedor = idVendedor;
+        }
+
+        public double getVenta() {
+            return venta;
+        }
+
+        public void setVenta(double venta) {
+            this.venta = venta;
+        }
+       
+   }
 }
